@@ -7,7 +7,7 @@
 		<Option compiler="gnu_gcc_112_mingw-w64-x86_64" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/HexagonerD" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Krampus21D" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
@@ -16,14 +16,14 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add option="-lEagleA5Debug.dll" />
-					<Add option="-lEagleDebug.dll" />
+					<Add option="-lEagleA5DebugShared.dll" />
+					<Add option="-lEagleDebugShared.dll" />
 					<Add option="-lallegro_monolith-debug.dll" />
 					<Add option="-ldwmapi" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Hexagoner" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Krampus21" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
@@ -32,15 +32,15 @@
 					<Add option="-O2" />
 				</Compiler>
 				<Linker>
-					<Add option="-lEagleA5.dll" />
-					<Add option="-lEagle.dll" />
+					<Add option="-lEagleA5Shared.dll" />
+					<Add option="-lEagleShared.dll" />
 					<Add option="-lallegro_monolith-debug.dll" />
 					<Add option="-ldwmapi" />
 					<Add option="-s" />
 				</Linker>
 			</Target>
 			<Target title="DebugStatic">
-				<Option output="bin/HexagonerDS" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Krampus21DS" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
@@ -89,7 +89,7 @@
 				</Linker>
 			</Target>
 			<Target title="ReleaseStatic">
-				<Option output="bin/HexagonerS" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Krampus21S" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
@@ -147,6 +147,7 @@
 		<Linker>
 			<Add directory="e:/usr64/lib" />
 		</Linker>
+		<Unit filename="KrampusMain.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
