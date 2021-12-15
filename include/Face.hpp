@@ -61,7 +61,7 @@ public :
    FACE_DIRECTION facedir;
    bool show;
    bool solid;
-   EagleColor color;
+   EagleColor vcolor;
    GLuint facetex;
    Location location;
    
@@ -109,12 +109,53 @@ public :
          default :
             throw -1;
    }
+   
+   bool Solid() {
+      return facepos.solid && faceneg.solid;
+   }
+   bool Oneway() {
+      return ((!facepos.solid && faceneg.solid) || (facepos.solid && !faceneg.solid));
+   }
+   bool Twoway() {
+      return (!facepos.solid && !faceneg.solid);
+   }
+   
+   
+};
+
+struct ItemDescription {
+   std::string name;
+   std::string shortdesc;
+   std::string longdesc;
+   EagleImage* icon;
 };
 
 
-struct Inventory;
+class Item {
+   ItemDescription desc;
+   int quantity;
+}
 
+class ItemSorter {
+   int operator()(const Item& i1 , const Item& i2) {
+      return (i1.desc.name.compare(i2.desc.name));
+   }
+}
 
+class Inventory {
+   std::map<std::string , Item , ItemSorter> items;
+   
+   Inventory();
+   Inventory() :
+         items()
+   {}
+   
+   AddItem
+}
+
+extern Inventory masterinventory;
+
+Inventory masterinventory;
 
 class Maze;
 
@@ -185,9 +226,9 @@ public :
       SIZE_EW = width;
       rooms.resize((SIZE_UD+2)*(SIZE_NS+2)*(SIZE_EW+2) , Room());
       
-      for (unsigned int zz = 0 ; zz <= SIZE_UD ; ++zz) {
-         for (unsigned int yy = 0 ; yy <= SIZE_NS ; ++yy) {
-            for (unsigned int xx = 0 , xx <= SIZE_EW ; ++xx) {
+      for (unsigned int zz = 1 ; zz <= SIZE_UD ; ++zz) {
+         for (unsigned int yy = 1 ; yy <= SIZE_NS ; ++yy) {
+            for (unsigned int xx = 1 , xx <= SIZE_EW ; ++xx) {
                Room* room = &rooms[Location(zz,yy,xx)];
                room->SetupRoom(this , Location(zz,yy,xx));
             }
