@@ -148,6 +148,12 @@
 			<Add directory="e:/usr64/lib" />
 		</Linker>
 		<Unit filename="KrampusMain.cpp" />
+		<Unit filename="include/Face.hpp" />
+		<Unit filename="include/Maze.hpp" />
+		<Unit filename="include/Room.hpp" />
+		<Unit filename="src/Face.cpp" />
+		<Unit filename="src/Maze.cpp" />
+		<Unit filename="src/Room.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
