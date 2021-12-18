@@ -9,7 +9,8 @@
 Wall::Wall() :
       walldir(NUM_WALL_DIRECTIONS),
       facepos(NUM_FACE_DIRECTIONS),
-      faceneg(NUM_FACE_DIRECTIONS)
+      faceneg(NUM_FACE_DIRECTIONS),
+      kweight(-1)
 {}
 
 

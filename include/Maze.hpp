@@ -16,7 +16,7 @@ public :
    size_t SIZE_NS;/// Height,y axis, valid rooms go from 1 to SIZE_NS
    size_t SIZE_EW;/// Width,x axis, valid rooms go from 1 to SIZE_EW
 
-   
+   unsigned int RoomIndex(Location l);
    Maze();
    Maze() :
       rooms(),
@@ -42,7 +42,28 @@ public :
          }
       }
    }
+   std::vector<Wall*> GetWallList() {
+   std::vector<Wall*> GetWallList() {
+      std::vector<Wall*>
+      for (unsigned int zz = 1 ; zz <= SIZE_UD ; ++zz) {
+         for (unsigned int yy = 1 ; yy <= SIZE_NS ; ++yy) {
+            for (unsigned int xx = 1 , xx <= SIZE_EW ; ++xx) {
+               
+            }
+         }
+      }
+   }
 };
 
 
+
+
+
+
 #endif // MAZE_HPP
+
+
+
+
+
+

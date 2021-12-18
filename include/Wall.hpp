@@ -25,6 +25,8 @@ public :
    WALL_DIRECTION walldir;/// Wall connects two rooms
    FACE facepos;/// N, E, or UP, Positive face
    FACE faceneg;/// S, W, or DN, Negative face
+   int kweight;/// Kruskal edge weight for maze generation
+   
    
    Wall();
    Wall(WALL_DIRECTION dir , Location loc);
