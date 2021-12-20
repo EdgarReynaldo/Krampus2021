@@ -17,6 +17,7 @@ public :
    size_t SIZE_EW;/// Width,x axis, valid rooms go from 1 to SIZE_EW
 
    unsigned int RoomIndex(Location l);
+   
    Maze();
    Maze() :
       rooms(),
@@ -24,8 +25,15 @@ public :
       SIZE_NS((size_t)-1),
       SIZE_EW((size_t)-1)
    {}
-   void GenerateMaze(size_t depth , size_t height , size_t width);
-   void GenerateMaze(size_t depth , size_t height , size_t width) {
+
+   void SetupMaze(size_t depth , size_t height , size_t width);
+   void SetupMaze(size_t depth , size_t height , size_t width) {
+      SetupRooms(depth , height , width);
+      
+   }
+   
+   void SetupRooms(size_t depth , size_t height , size_t width);
+   void SetupRooms(size_t depth , size_t height , size_t width) {
    {
       rooms.clear();
       SIZE_UD = depth;
@@ -33,25 +41,29 @@ public :
       SIZE_EW = width;
       rooms.resize((SIZE_UD+2)*(SIZE_NS+2)*(SIZE_EW+2) , Room());
       
+      /// Setup all the rooms
       for (unsigned int zz = 1 ; zz <= SIZE_UD ; ++zz) {
          for (unsigned int yy = 1 ; yy <= SIZE_NS ; ++yy) {
             for (unsigned int xx = 1 , xx <= SIZE_EW ; ++xx) {
-               Room* room = &rooms[Location(zz,yy,xx)];
-               room->SetupRoom(this , Location(zz,yy,xx));
+               Room* room = &rooms[RoomIndex(Location(zz,yy,xx))];
+               room->SetupRoom(this , Location(zz,yy,xx));/// This setups the rooms pwall array
             }
          }
       }
    }
-   std::vector<Wall*> GetWallList() {
-   std::vector<Wall*> GetWallList() {
-      std::vector<Wall*>
-      for (unsigned int zz = 1 ; zz <= SIZE_UD ; ++zz) {
-         for (unsigned int yy = 1 ; yy <= SIZE_NS ; ++yy) {
-            for (unsigned int xx = 1 , xx <= SIZE_EW ; ++xx) {
-               
-            }
+   std::vector<Wall*> GetWallList(size_t zz) {
+   std::vector<Wall*> GetWallList(size_t zz) {
+      std::vector<Wall*> wlist;
+      for (unsigned int yy = 1 ; yy <= SIZE_NS ; ++yy) {
+         for (unsigned int xx = 1 , xx <= SIZE_EW ; ++xx) {
+            Room* room = &rooms[RoomIndex(Location(zz,yy,xx))];
+            wlist.push_back(room->pwall[FACE_N]);
+            wlist.push_back(room->pwall[FACE_E]);
          }
       }
+      wlist.pop_back();
+      wlist.pop_back();
+      return wlist;
    }
 };
 

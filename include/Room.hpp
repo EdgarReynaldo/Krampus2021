@@ -5,6 +5,7 @@
 #ifndef ROOM_HPP
 #define ROOM_HPP
 
+#include "Face.hpp"
 #include "Wall.hpp"
 #include "Location.hpp"
 #include "Inventory.hpp"
@@ -21,6 +22,7 @@ public :
    Wall wallwest;
 
    Wall* pwall[NUM_FACE_DIRECTIONS];/// Each room has 6 walls
+   Face* pfaces[NUM_FACE_DIRECTIONS];
    
    Location location;
    
