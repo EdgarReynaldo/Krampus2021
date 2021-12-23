@@ -8,40 +8,25 @@
 
 
 
-typedef std::map<std::string , Item> ITEMMAP;
+typedef std::map<std::string , Item> ITEMMAP;/// name , item map
 typedef ITEMMAP::iterator ITEMIT;
 
 class Inventory {
-   std::map<std::string , Item> items;
+   ITEMMAP items;
    
    Inventory();
    Inventory() :
          items()
    {}
    
-   AddItem(Item item);
-   AddItem(Item item) {
-      ITEMIT it = items.find(item.name);
-      if (it != items.end()) {
-         it->quantity += item.quantity;
-      }
-      else {
-         items.insert(item);
-      }
-   }
+   int AddItem(Item item);
+   int NumberOfItem(std::string itemname);
    Item TakeItem(std::string iname , quantity);
-   Item TakeItem(std::string iname , quantity) {
-      ITEMIT it = items.find(iname);
-      if (it != items.end()) {
-         Item item = items[iname];
-         if (item.quantity >= quantity) {
-            item.quantity -= quantity;
-            if (item.quantity = 0) {items.erase(item.desc.name);}
-            
-            return Item(item.desc , item.quantity - quantity);
-         }
-      }
-   }
+   Item TakeItemAll(std::string itemname);
+
+   ITEMMAP TakeAllItemsFromInventory();
+
+
 }
 
 Inventory CreateGameInventory {

@@ -24,6 +24,9 @@ int main(int argc , char** argv) {
    
    sys->Rest(3.0);
    
+   
+   Game game;
+   
    return 0;
 }
 

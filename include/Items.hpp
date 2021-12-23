@@ -10,10 +10,14 @@
 
 
 
-struct ItemDescription {
+class ItemDescription {
+public :
    std::string name;
    std::string shortdesc;
    std::string longdesc;
+   ItemDescription();
+      
+   ItemDescription(std::string itemname , std::string shortitemdesc , std::string longitemdesc);
 };
 
 
@@ -21,16 +25,14 @@ class Item {
 public :
    ItemDescription desc;
    int quantity;
-   Item(std::string name , std::string shortdesc , std::string longdesc , size_t num);
-   Item(std::string name , std::string shortdesc , std::string longdesc , size_t num) :
-         desc(name , shortdesc , longdesc),\
-         quantity(num)
-   {}
-   Item& SetQuantity(size_t numleft);
-   Item& SetQuantity(size_t numleft) {
-      quantity = numleft;
-      return *this;
-   }
+
+   Item();
+   Item(ItemDescription itemdesc , int num = 1);
+   Item(std::string name , std::string shortdesc , std::string longdesc , size_t num = 0);
+   Item TakeFrom(int num = 1);
+   Item& AddTo(size_t num = 1);
+   void SetQuantity(size_t numleft);
+
 }
 
 //class ItemSorter {

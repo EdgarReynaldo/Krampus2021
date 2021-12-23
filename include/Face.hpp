@@ -21,6 +21,17 @@ enum FACE_DIRECTION {
    NUM_FACE_DIRECTIONS = 6
 };
 
+enum FACE_CORNER {
+   CORNER_BL = 0,
+   CORNER_BR = 1,
+   CORNER_TR = 2,
+   CORNER_TL = 3,
+   NUM_CORNERS = 4
+};
+
+
+extern const float[NUM_FACE_DIRECTIONS][NUM_CORNERS][3] cube_verts;
+
 
 
 class Face {
