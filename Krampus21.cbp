@@ -148,6 +148,8 @@
 			<Add directory="e:/usr64/lib" />
 		</Linker>
 		<Unit filename="KrampusMain.cpp" />
+		<Unit filename="include/Camera.hpp" />
+		<Unit filename="include/Cube.hpp" />
 		<Unit filename="include/Events.hpp" />
 		<Unit filename="include/Face.hpp" />
 		<Unit filename="include/Game.hpp" />
@@ -155,9 +157,16 @@
 		<Unit filename="include/Items.hpp" />
 		<Unit filename="include/Location.hpp" />
 		<Unit filename="include/Maze.hpp" />
+		<Unit filename="include/Orient.hpp" />
 		<Unit filename="include/Player.hpp" />
 		<Unit filename="include/Room.hpp" />
+		<Unit filename="include/Scene.hpp" />
+		<Unit filename="include/SpatialInfo.hpp" />
+		<Unit filename="include/Vec3.hpp" />
+		<Unit filename="include/Vec3D.hpp" />
 		<Unit filename="include/Wall.hpp" />
+		<Unit filename="src/Camera.cpp" />
+		<Unit filename="src/Cube.cpp" />
 		<Unit filename="src/Events.cpp" />
 		<Unit filename="src/Face.cpp" />
 		<Unit filename="src/Game.cpp" />
@@ -165,8 +174,13 @@
 		<Unit filename="src/Items.cpp" />
 		<Unit filename="src/Location.cpp" />
 		<Unit filename="src/Maze.cpp" />
+		<Unit filename="src/Orient.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Room.cpp" />
+		<Unit filename="src/Scene.cpp" />
+		<Unit filename="src/SpatialInfo.cpp" />
+		<Unit filename="src/Vec3.cpp" />
+		<Unit filename="src/Vec3D.cpp" />
 		<Unit filename="src/Wall.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
