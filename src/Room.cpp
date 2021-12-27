@@ -7,7 +7,7 @@
 
 
 
-Room() :
+Room::Room() :
       walldown(),
       wallsouth(),
       wallwest(),
@@ -18,8 +18,7 @@ Room() :
 {}
 
 
-void SetupRoom(Maze* m , Location loc) :
-{
+void Room::SetupRoom(Maze* m , Location loc) {
    location = loc;
    walldown = Wall(WALL_UD , loc);
    wallsouth = Wall(WALL_NS , loc);

@@ -1,20 +1,22 @@
 
 
 
-
+#include "Eagle/Exception.hpp"
 #include "Inventory.hpp"
 
 
 
 
-void Inventory::AddItem(Item item) {
-   ITEMIT it = items.find(item.name);
+int Inventory::AddItem(Item item) {
+   ITEMIT it = items.find(item.desc.name);
    if (it != items.end()) {
-      it->quantity += item.quantity;
+      it->second.quantity += item.quantity;
    }
    else {
-      items.insert(item);
+      items.insert(std::pair<std::string , Item>(item.desc.name , item));
+      return item.quantity;
    }
+   return it->second.quantity;
 }
 
 
@@ -29,7 +31,7 @@ int Inventory::NumberOfItem(std::string itemname) {
 
 
 
-Item Inventory::TakeItem(std::string iname , quantity) {
+Item Inventory::TakeItem(std::string iname , size_t quantity) {
    ITEMIT it = items.find(iname);
    if (it != items.end()) {
       return items[iname].TakeFrom(quantity);
@@ -40,7 +42,7 @@ Item Inventory::TakeItem(std::string iname , quantity) {
 
 
 Item Inventory::TakeItemAll(std::string itemname) {
-   EAGLE_ASSERT(NumberOfItem(itemname);
+   EAGLE_ASSERT(NumberOfItem(itemname));
    return TakeItem(itemname , NumberOfItem(itemname));
 }
 

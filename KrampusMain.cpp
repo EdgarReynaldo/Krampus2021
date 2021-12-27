@@ -3,10 +3,17 @@
 
 
 #include "Eagle/Backends/Allegro5Backend.hpp"
+#include "Game.hpp"
+
 
 
 
 int main(int argc , char** argv) {
+   
+   (void)argc;
+   (void)argv;
+   
+   
    
    Allegro5System* sys = GetAllegro5System();
    
@@ -24,9 +31,42 @@ int main(int argc , char** argv) {
    
    sys->Rest(3.0);
    
+   bool quit = false;
+   bool redraw = true;
+   
+   Camera cam(Vec3(0,0,0) , Orient(Vec3(0,0,0)) , M_PI/4.0 , 1.6);
    
    Game game;
+   if (game.Init() != SCENE_READY) {
+      EagleCritical() << "Failed to setup game." << std::endl;
+      return 1;
+   }
    
+   while (!quit) {
+      if (redraw) {
+         win->Clear();
+         game->Display();
+         win->FlipDisplay();
+         redraw = false;
+      }
+      do {
+         EagleEvent e = sys->WaitForSystemEventAndUpdateState();
+         if (game.HandleEvent(e) == SCENE_COMPLETE) {
+            quit = true;
+         }
+         if (e.type == EAGLE_EVENT_TIMER) {
+            redraw = true;
+         }
+      } while (!quit);
+   }
    return 0;
 }
+
+
+
+
+
+
+
+
 

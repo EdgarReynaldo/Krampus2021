@@ -30,7 +30,6 @@ enum FACE_CORNER {
 };
 
 
-extern const float[NUM_FACE_DIRECTIONS][NUM_CORNERS][3] cube_verts;
 
 
 
@@ -43,7 +42,7 @@ public :
    GLuint facetex;
    Location location;
    
-   Face(FACE_DIRECTION dir , Location loc);
+//   Face(FACE_DIRECTION dir , Location loc);
    Face(FACE_DIRECTION dir , Location loc) :
          facedir(dir),
          show(true),
@@ -53,11 +52,6 @@ public :
    {}
 };
 
-class PlayerBase {
-   Inventory inventory;
-   
-   virtual void React(EagleEvent e)=0;
-}
 
 
 

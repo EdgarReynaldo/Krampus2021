@@ -6,8 +6,11 @@
 #define MAZE_HPP
 
 #include <vector>
+#include "Room.hpp"
+#include "Eagle/Random.hpp"
 
 
+class Wall;
 
 class Maze {
 public :
@@ -17,17 +20,17 @@ public :
    size_t SIZE_EW;/// Width,x axis, valid rooms go from 1 to SIZE_EW
    MTRNG mazerng;
 
-   void RandomizeWallWeights(std::vector<Wall*>& wlist);/// Uses rng
+   void RandomizeWallWeights(std::vector<Wall*>& wlist);/// Uses mazerng
 
 
 public :
 
 
 
-   unsigned int RoomIndex(Location l);
+   size_t RoomIndex(Location l);
    
    
-   Maze();
+//   Maze();
    Maze() :
       rooms(),
       SIZE_UD((size_t)-1),
@@ -38,23 +41,25 @@ public :
       mazerng.Seed(0);
    }
 
-   void SetupMaze(size_t depth , size_t height , size_t width);
+//   void SetupMaze(size_t depth , size_t height , size_t width);
    void SetupMaze(size_t depth , size_t height , size_t width) {
       SetupRooms(depth , height , width);
       std::vector<std::vector<Wall*> > wallvecs;
       wallvecs.resize(depth , std::vector<Wall*>());
       for (size_t i = 1 ; i < SIZE_UD ; ++i) {
          wallvecs[i] = GetWallList(i);
-         RandomizeWallWeights(wallvecs[i]);/// uses rng
+         RandomizeWallWeights(wallvecs[i]);/// uses mazerng
       }
-      for (size_t i = 1 ; i < size_UD ; ++i) {
-         KruskalizeWalls(wallvecs[i]);/// uses rng
+      for (size_t i = 1 ; i < SIZE_UD ; ++i) {
+         KruskalizeWalls(wallvecs[i]);/// uses mazerng
       }
    }
    
    void SetupRooms(size_t depth , size_t height , size_t width);
    std::vector<Wall*> GetWallList(size_t zz);
-   void KruskalizeWalls(std::vector<Wall*>& walls , size_t level);
+   void KruskalizeWalls(std::vector<Wall*>& walls);/// Uses mazerng
+   
+   void DrawLevel(size_t level);
 };
 
 

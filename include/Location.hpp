@@ -15,7 +15,7 @@ class Location {
 public :
    int x,y,z;
    
-   Location(int zpos , int ypos , int xpos);
+//   Location(int zpos , int ypos , int xpos);
    Location(int zpos , int ypos , int xpos) :
          x(xpos),
          y(ypos),

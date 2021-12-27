@@ -3,6 +3,8 @@
 
 
 #include "Maze.hpp"
+#include "Wall.hpp"
+
 
 
 
@@ -35,7 +37,7 @@ void Maze::SetupRooms(size_t depth , size_t height , size_t width) {
    /// Setup all the rooms
    for (unsigned int zz = 1 ; zz <= SIZE_UD ; ++zz) {
       for (unsigned int yy = 1 ; yy <= SIZE_NS ; ++yy) {
-         for (unsigned int xx = 1 , xx <= SIZE_EW ; ++xx) {
+         for (unsigned int xx = 1 ; xx <= SIZE_EW ; ++xx) {
             Room* room = &rooms[RoomIndex(Location(zz,yy,xx))];
             room->SetupRoom(this , Location(zz,yy,xx));/// This setups the rooms pwall array
          }
@@ -61,16 +63,17 @@ std::vector<Wall*> Maze::GetWallList(size_t zz) {
 
 
 
-void Maze::KruskalizeWalls(std::vector<Wall*>& walls , size_t level) {
+void Maze::KruskalizeWalls(std::vector<Wall*>& walls) {
    std::vector<std::unordered_set<Room*> > paths;
+   paths.resize(SIZE_NS*SIZE_EW , std::unordered_set<Room*>());
    std::multimap<int , Wall*> wall_weight_map;
    for (size_t i = 0 ; i < walls.size() ; ++i) {
-      wall_weight_map.insert(walls[i]->kweight , walls[i]);/// Initialize the wall weight map
+      wall_weight_map.insert(std::pair<int , Wall*>(walls[i]->kweight , walls[i]));/// Initialize the wall weight map
    }
    for (size_t yy = 1 ; yy <= SIZE_NS ; ++yy) {
       for (size_t xx = 1 ; xx <= SIZE_EW ; ++xx) {
          Room* room = &rooms[RoomIndex(Location(level , yy , xx))];
-         paths[room].insert(room);/// Initialize the room map
+         paths[SIZE_EW*((int)yy-1 + (int)xx - 1].insert(room);/// Initialize the room map
       }
    }
    typedef std::multimap<int , Wall*>::iterator WWMAPIT;
@@ -101,6 +104,7 @@ void Maze::KruskalizeWalls(std::vector<Wall*>& walls , size_t level) {
             newpath.insert(r2);
             paths.push_back(newpath);
             wall->MakeOpen();
+            wall->MakeInvisible();
          }
          else if (s1 == s2) {
             /// Both rooms are already on the same set, loop formed, don't remove wall
@@ -112,6 +116,7 @@ void Maze::KruskalizeWalls(std::vector<Wall*>& walls , size_t level) {
             Room* newroom = (s1 == -1)?&r2:&r1;
             paths[*pset].insert(newroom);
             wall->MakeOpen();
+            wall->MakeInvisible();
          }
          else {
             /// Both rooms are on a different path - combine them
@@ -122,8 +127,35 @@ void Maze::KruskalizeWalls(std::vector<Wall*>& walls , size_t level) {
             paths[subindex] = paths.back();
             paths.pop_back();
             wall->MakeOpen();
+            wall->MakeInvisible();
          }
       }
       it = keys.second;
    }
 }
+
+
+
+void Maze::DrawLevel(size_t level) {
+   EagleColor colors[NUM_FACE_DIRECTIONS] = {
+      EagleColor(0,255,255),
+      EagleColor(0,255,0),
+      EagleColor(255,255,0),
+      EagleColor(0,0,127),
+      EagleColor(0,127,0),
+      EagleColor(127,0,0)
+   };
+   glBegin(GL_TRIANGLES);
+   for (unsigned int yy = 1 ; yy < SIZE_NS ; ++yy) {
+      for (unsigned int xx = 1 ; xx < SIZE_EW ; ++xx) {
+         DrawCubeInsides(Location(level , yy , xx) , colors);
+      }
+   }
+   glEnd();
+}
+
+
+
+
+
+

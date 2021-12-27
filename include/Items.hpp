@@ -33,7 +33,7 @@ public :
    Item& AddTo(size_t num = 1);
    void SetQuantity(size_t numleft);
 
-}
+};
 
 //class ItemSorter {
 //   int operator()(const Item& i1 , const Item& i2) {
