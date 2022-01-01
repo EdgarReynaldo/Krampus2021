@@ -14,12 +14,12 @@
 class Camera {
 
 protected :
-   SpatialInfo info;
+   SpatialInfo info;/// pos, orient
 
-   double hfov;
-   double aspect;/// w/h
+   double hfov;/// horizontal field of view
+   double aspect;/// w/h of backbuffer
    
-   bool ortho;
+   bool ortho;/// orthographic
    
 public :
    
@@ -33,7 +33,6 @@ public :
    void SetAspect(double a) {aspect = a;}
    
    void Setup3D(bool orthographic);
-   static void Setup2D();
    
    const SpatialInfo& Info() {return info;}
    
@@ -46,6 +45,23 @@ public :
    inline bool Ortho() {return ortho;}
 };
 
+void Setup2D(int width , int height);
+
+#include "Camera.hpp"
+
+
+
+class PlayerBase;
+
+class PlayerCamera : public Camera {
+public :
+   PlayerBase* player;
+
+   PlayerCamera();
+
+   void SetPlayer(PlayerBase* p);
+   void SetupViewPoint();
+};
 
 
 

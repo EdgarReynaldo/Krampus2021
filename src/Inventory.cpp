@@ -56,6 +56,19 @@ ITEMMAP Inventory::TakeAllItemsFromInventory() {
 
 
 
+Inventory CreateGameInventory() {
+   Inventory inv;
+   inv.AddItem(Item("Gold Coin" , "A shiny gold coin" , "A gold coin with bull horns engraved on it" , 10));
+   inv.AddItem(Item("Silver Coin" , "A bright silver coin" , "A silver coin with santa engraved on it" , 25));
+   inv.AddItem(Item("Copper Coin" , "A dull copper coin" , "A plain copper coin that is blank" , 100));
+   inv.AddItem(Item("Cloth slippers" , "A pair of cloth slippers" , "Slippers, quite quiet on stone halls" , 1));
+   inv.AddItem(Item("Trumpet" , "A shiny brass trumpet" , "A trumpet that makes very loud noises, sure to get attention" , 1));
+   inv.AddItem(Item("Flute" , "A little wooden flute" , "A soothing flute sure to calm the angriest of beasts" , 1));
+   inv.AddItem(Item("Patchouli" , "A vial of patchouli oil" , "Patchouli oil, good for masking scent" , 5));
+   return inv;
+};
+
+
 
 
 

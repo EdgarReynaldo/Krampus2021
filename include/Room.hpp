@@ -25,6 +25,7 @@ public :
    Face* pfaces[NUM_FACE_DIRECTIONS];
    
    Location location;
+   int scent;
    
    Inventory inventory;
    

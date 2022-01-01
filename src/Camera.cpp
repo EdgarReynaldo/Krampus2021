@@ -3,21 +3,16 @@
 
 
 #include "Camera.hpp"
+#include "Player.hpp"
 
-//#include "BasicAllegro.hpp"/// TODO : This header doesn't work right with Camera.cpp
-extern int sw,sh;
+#include "Eagle/Math.hpp"
 #include "allegro5/allegro.h"
-extern ALLEGRO_DISPLAY* d;
-
-
-#include "Math.hpp"
-
 
 
 Camera::Camera() :
       info(START),
       hfov(6.0*M_PI/12.0),/// In RADIANS (PI/2 (90 degrees) looks best, with the least distortion)
-      aspect((double)sw/sh),
+      aspect(4.0/3.0),
       ortho(false)
 {}
 
@@ -28,7 +23,7 @@ void Camera::Setup3D(bool orthographic) {
    ALLEGRO_TRANSFORM proj;
    ALLEGRO_TRANSFORM cam;
    
-   const double near = 1.0;
+   const double near = 0.1;
    const double w = near*tan(hfov/2.0);
 
 ///   const double l = -w;
@@ -40,7 +35,7 @@ void Camera::Setup3D(bool orthographic) {
    
    const double top = w/aspect;
    const double bot = -w/aspect;
-   const double far = 2000.0;
+   const double far = 25.0;
 
    
    al_identity_transform(&proj);
@@ -65,15 +60,6 @@ void Camera::Setup3D(bool orthographic) {
 
 
 
-void Camera::Setup2D() {
-   ALLEGRO_TRANSFORM tr;
-   al_identity_transform(&tr);
-   al_orthographic_transform(&tr , 0 , 0 , -1.0 , al_get_display_width(d) , al_get_display_height(d) , 1.0);
-   al_use_projection_transform(&tr);
-   
-   al_identity_transform(&tr);
-   al_use_transform(&tr);
-}
 
 
 
@@ -92,3 +78,43 @@ void Camera::Turn(Vec3 omega , double dt) {
 }
 
 
+
+
+void Setup2D(int width , int height) {
+   ALLEGRO_TRANSFORM tr;
+   al_identity_transform(&tr);
+   al_orthographic_transform(&tr , 0 , 0 , -1.0 , width , height , 1.0);
+   al_use_projection_transform(&tr);
+   
+   al_identity_transform(&tr);
+   al_use_transform(&tr);
+}
+
+
+
+PlayerCamera::PlayerCamera() :
+      Camera(Vec3(0.0,0.0,0.0) , Orient() , 2.0*M_PI/3.0 , 1.6),
+      player(0)
+{
+   
+}
+
+
+
+void PlayerCamera::SetPlayer(PlayerBase* p) {
+   player = p;
+}
+
+
+
+void PlayerCamera::SetupViewPoint() {
+   SetHFOV(M_PI/3.0);
+   SetAspect(1.6);
+   SetPos(Vec3(player->location.x , player->location.y , player->location.z) + Vec3(0.5,0.5,0.5));
+   SetOrientation(player->movement.dest.orient);
+   Setup3D(false);
+}
+   
+   
+   
+   

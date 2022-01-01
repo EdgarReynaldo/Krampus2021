@@ -8,19 +8,20 @@
 
 Wall::Wall() :
       walldir(NUM_WALL_DIRECTIONS),
-      facepos(NUM_FACE_DIRECTIONS),
-      faceneg(NUM_FACE_DIRECTIONS),
+      facepos(),
+      faceneg(),
       kweight(-1)
 {}
 
 
 
 Wall::Wall(WALL_DIRECTION dir , Location loc) :
-      walldir(dir),// floor tile
-      facepos(NUM_FACE_DIRECTIONS),
-      faceneg(NUM_FACE_DIRECTIONS)
+      walldir(dir),
+      facepos(),
+      faceneg(),
+      kweight(-1)
 {
-   switch(walldir) :
+   switch(walldir) {
       case WALL_UD :
          faceneg = Face(FACE_DN , loc);/// Floor in this room
          facepos = Face(FACE_UP , loc.Down());/// Ceiling beneath us
@@ -35,6 +36,7 @@ Wall::Wall(WALL_DIRECTION dir , Location loc) :
          break;
       default :
          throw -1;
+   };
 }
 
 

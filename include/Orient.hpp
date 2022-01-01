@@ -24,6 +24,8 @@ public :
    Orient() : theta(0,0,0) , fw(FORWARD) , rt(RIGHT) , up(UP) {}
    Orient(Vec3 angles) : theta() , fw(FORWARD) , rt(RIGHT) , up(UP) {SetTheta(angles);}
    
+   Orient operator-(const Orient& o);
+   
    void Reset() {*this = Orient();}
    
    void SetTheta(Vec3 t) {theta = t;CalcAxes();}

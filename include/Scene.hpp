@@ -21,9 +21,9 @@ enum SCENE_STATUS {
 
 
 class Scene {
-   SCENE_STATUS status;
 public :
 //   Scene();
+   SCENE_STATUS status;
    Scene() :
          status(SCENE_NOTREADY)
    {}

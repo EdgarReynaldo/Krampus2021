@@ -9,19 +9,17 @@
 
 #include "Maze.hpp"
 #include "Scene.hpp"
+#include "Player.hpp"
 
 
-
-class Player;
-class AIPlayer;
 
 class Game : public Scene {
    
    Maze maze;
    Inventory inventory;
 
-   Player* player;
-   AIPlayer* minotaur;
+   HumanPlayer player;
+   Minotaur minotaur;
 
 public :
 //   Game();
@@ -29,9 +27,10 @@ public :
          Scene(),
          maze(),
          inventory(),
-         player(0),
-         minotaur(0)
-   {}
+         player(),
+         minotaur()
+   {
+   }
 
    virtual SCENE_STATUS Init();/// returns SCENE_READY or SCENE_NOTREADY
    

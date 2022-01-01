@@ -116,3 +116,10 @@ Orient LocalTurn(const Orient& o , Vec3 omega , double dt) {
 }
 
 
+
+Orient Orient::operator-(const Orient& o) {
+   Orient orient;
+   orient.SetTheta(this->theta - o.theta);
+   return orient;
+}
+

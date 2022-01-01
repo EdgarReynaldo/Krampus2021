@@ -3,12 +3,12 @@
 
 
 #include "Cube.hpp"
-
+#include "Vec3D.hpp"
 
 
 std::vector<float> MakeCubeInside(float radius) {
    static const float r = 0.5f;
-   static const float[NUM_FACE_DIRECTIONS][NUM_CORNERS][3] cube_verts = {
+   static const float cube_verts[NUM_FACE_DIRECTIONS][NUM_CORNERS][3] = {
       {{ r,-r, r},{-r,-r, r},{-r, r, r},{ r, r, r}},/// FACE_UP - ceiling - aligned with north up
       {{-r, r,-r},{ r, r,-r},{ r, r, r},{-r, r, r}},/// FACE_N - north - aligned with up
       {{ r, r,-r},{ r,-r,-r},{ r,-r, r},{ r, r, r}},/// FACE_E - east - aligned with up
@@ -40,10 +40,10 @@ const float* GetInsideCubeFace(FACE_DIRECTION d) {
 void QueueInsideFaceTriangles(FACE_DIRECTION d , Location loc , EagleColor col) {
    const float* face = GetInsideCubeFace(d);
    const Vec3D center[NUM_CORNERS] = {
-      Vec3D(face[0] , face[1] , face[2]) + Vec3D(loc.x + 0.5f , loc.y + 0.5f , loc.z + 0.5f),
-      Vec3D(face[3] , face[4] , face[5]) + Vec3D(loc.x + 0.5f , loc.y + 0.5f , loc.z + 0.5f),
-      Vec3D(face[6] , face[7] , face[8]) + Vec3D(loc.x + 0.5f , loc.y + 0.5f , loc.z + 0.5f),
-      Vec3D(face[9] , face[10] , face[11])
+      Vec3D(face[0] , face[1]  , face[2])  + Vec3D(loc.x + 0.5f , loc.y + 0.5f , loc.z + 0.5f),
+      Vec3D(face[3] , face[4]  , face[5])  + Vec3D(loc.x + 0.5f , loc.y + 0.5f , loc.z + 0.5f),
+      Vec3D(face[6] , face[7]  , face[8])  + Vec3D(loc.x + 0.5f , loc.y + 0.5f , loc.z + 0.5f),
+      Vec3D(face[9] , face[10] , face[11]) + Vec3D(loc.x + 0.5f , loc.y + 0.5f , loc.z + 0.5f)
    };
 
    Vec3D n1 = GetNormal(center[0] , center[1] , center[2]);
@@ -63,6 +63,14 @@ void QueueInsideFaceTriangles(FACE_DIRECTION d , Location loc , EagleColor col) 
 
 
 
+void DrawCubeInsides(Location loc , EagleColor face_colors[NUM_FACE_DIRECTIONS]) {
+   QueueInsideFaceTriangles(FACE_DN , loc , face_colors[FACE_DN]);
+   QueueInsideFaceTriangles(FACE_S  , loc , face_colors[FACE_S ]);
+   QueueInsideFaceTriangles(FACE_W  , loc , face_colors[FACE_W ]);
+   QueueInsideFaceTriangles(FACE_UP , loc , face_colors[FACE_UP]);
+   QueueInsideFaceTriangles(FACE_N  , loc , face_colors[FACE_N ]);
+   QueueInsideFaceTriangles(FACE_E  , loc , face_colors[FACE_E ]);
+}
 
 
 

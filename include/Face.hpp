@@ -42,14 +42,9 @@ public :
    GLuint facetex;
    Location location;
    
-//   Face(FACE_DIRECTION dir , Location loc);
-   Face(FACE_DIRECTION dir , Location loc) :
-         facedir(dir),
-         show(true),
-         solid(true),
-         facetex(GLuint(-1)),
-         location(loc)
-   {}
+   Face();
+   Face(FACE_DIRECTION dir , Location loc);
+
 };
 
 

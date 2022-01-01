@@ -37,16 +37,13 @@ void Vec3D::SetXYZ(double xpos , double ypos , double zpos) {
 
 
 
-Vec3D Vec3D::operator+(const Vec3D& v) {
-   x += v.x;
-   y += v.y;
-   z += v.z;
-   return *this;
+Vec3D Vec3D::operator+(const Vec3D& v) const {
+   return Vec3D(x + v.x , y + v.y , z + v.z);
 }
 
 
 
-Vec3D Vec3D::operator-(const Vec3D& v) {
+Vec3D Vec3D::operator-(const Vec3D& v) const {
    return operator+(-v);
 }
 
@@ -58,16 +55,13 @@ Vec3D Vec3D::operator-() const {
 
 
 
-Vec3D Vec3D::operator*(double factor) {
-   x *= factor;
-   y *= factor;
-   z *= factor;
-   return *this;
+Vec3D Vec3D::operator*(double factor) const {
+   return Vec3D(x*factor , y*factor , z*factor);
 }
 
 
 
-Vec3D Vec3D::operator/(double quotient) {
+Vec3D Vec3D::operator/(double quotient) const {
    EAGLE_ASSERT(quotient != 0.0);
    return operator*(1.0/quotient);
 }
@@ -86,6 +80,11 @@ Vec3D& Vec3D::Normalize() {
 }
 
    
-   
+
+Vec3D operator-(const Vec3D& v1 , const Vec3D& v2) {
+   Vec3D v3 = v2 +- v1;
+   return v3;
+}
+
    
    

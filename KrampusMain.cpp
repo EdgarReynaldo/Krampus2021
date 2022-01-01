@@ -45,7 +45,7 @@ int main(int argc , char** argv) {
    while (!quit) {
       if (redraw) {
          win->Clear();
-         game->Display();
+         game.Display();
          win->FlipDisplay();
          redraw = false;
       }
