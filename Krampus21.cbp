@@ -157,6 +157,7 @@
 		<Unit filename="include/Items.hpp" />
 		<Unit filename="include/Location.hpp" />
 		<Unit filename="include/Maze.hpp" />
+		<Unit filename="include/Movement.hpp" />
 		<Unit filename="include/Orient.hpp" />
 		<Unit filename="include/Player.hpp" />
 		<Unit filename="include/Room.hpp" />
@@ -174,6 +175,7 @@
 		<Unit filename="src/Items.cpp" />
 		<Unit filename="src/Location.cpp" />
 		<Unit filename="src/Maze.cpp" />
+		<Unit filename="src/Movement.cpp" />
 		<Unit filename="src/Orient.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Room.cpp" />
