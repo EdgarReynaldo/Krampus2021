@@ -39,7 +39,6 @@ public :
    bool show;
    bool solid;
    EagleColor vcolor;
-   GLuint facetex;
    Location location;
    
    Face();

@@ -43,7 +43,7 @@ void Camera::Setup3D(bool orthographic) {
       al_perspective_transform(&proj , l , top , near , r , bot , far);
    }
    else {
-      int diam = 500;
+      int diam = 50;
       al_orthographic_transform(&proj , -diam , diam , -diam , diam , -diam , diam);
    }
    al_use_projection_transform(&proj);
@@ -112,7 +112,7 @@ void PlayerCamera::SetupViewPoint() {
    SetAspect(1.6);
    SetPos(Vec3(player->location.x , player->location.y , player->location.z) + Vec3(0.5,0.5,0.5));
    SetOrientation(player->movement.dest.orient);
-   Setup3D(false);
+   Setup3D(true);
 }
    
    

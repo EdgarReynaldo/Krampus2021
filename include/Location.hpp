@@ -24,12 +24,12 @@ public :
    
    bool ValidForMaze(Maze* m);
    
-   inline Location Up() {return Location(x,y,z+1);}
-   inline Location Down() {return Location(x,y,z-1);}
-   inline Location North() {return Location(x,y+1,z);}
-   inline Location South() {return Location(x,y-1,z);}
-   inline Location East() {return Location(x+1,y,z);}
-   inline Location West() {return Location(x-1,y,z);}
+   inline Location Up() {return Location(z+1,y,x);}
+   inline Location Down() {return Location(z-1,y,x);}
+   inline Location North() {return Location(z,y+1,x);}
+   inline Location South() {return Location(z,y-1,x);}
+   inline Location East() {return Location(z,y,x+1);}
+   inline Location West() {return Location(z,y,x-1);}
 };
 
 

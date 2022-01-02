@@ -3,7 +3,7 @@
 
 
 #include "Game.hpp"
-
+#include "Eagle/GraphicsContext.hpp"
 
 
 
@@ -13,7 +13,7 @@ SCENE_STATUS Game::Init() {
    minotaur.location = Location(1,25,25);
    
    inventory = CreateGameInventory();
-   minotaur.inventory.AddItem(inventory.TakeItemAll("Gold Coins"));
+   minotaur.inventory.AddItem(inventory.TakeItemAll("Gold Coin"));
    
    minotaur.pmaze = &maze;
    
@@ -41,9 +41,12 @@ SCENE_STATUS Game::Update(double dt) {
 
 
 
-void Game::Display() {
+void Game::Display(EagleGraphicsContext* win) {
    player.SetupCamera();
    maze.DrawLevel(1);
+   Setup2D(1200,900);
+   win->DrawTextString(win->DefaultFont() , "Hello Krampus Revenge" , 10 , 10 , EagleColor(255,255,0));
+   
 }
 
 

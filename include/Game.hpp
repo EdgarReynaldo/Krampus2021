@@ -36,7 +36,7 @@ public :
    
    virtual SCENE_STATUS HandleEvent(EagleEvent e);/// returns SCENE_RUNNING or SCENE_COMPLETE
    virtual SCENE_STATUS Update(double dt);/// returns SCENE_RUNNING or SCENE_COMPLETE
-   virtual void Display();
+   virtual void Display(EagleGraphicsContext* win);
 
       
    void SetupMaze(size_t game_depth , size_t game_height , size_t game_width);/// Looking from top down depth is z , height is y , width is x

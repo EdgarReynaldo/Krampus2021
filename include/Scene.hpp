@@ -19,6 +19,7 @@ enum SCENE_STATUS {
 };
 
 
+class EagleGraphicsContext;
 
 class Scene {
 public :
@@ -33,7 +34,7 @@ public :
    
    virtual SCENE_STATUS HandleEvent(EagleEvent e)=0;
    virtual SCENE_STATUS Update(double dt)=0;
-   virtual void Display()=0;
+   virtual void Display(EagleGraphicsContext* win)=0;
    
    SCENE_STATUS GetStatus() {return status;}
 };

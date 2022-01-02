@@ -20,6 +20,7 @@ extern const std::vector<float> unitcubeinside;
 const float* GetInsideCubeFace(FACE_DIRECTION d);
 
 void QueueInsideFaceTriangles(FACE_DIRECTION d , Location loc , EagleColor col);
+void QueueInsideFaceTriangles(FACE_DIRECTION d , Location loc , EagleColor col EagleImage* tex);
 
 void DrawCubeInsides(Location loc , EagleColor face_colors[NUM_FACE_DIRECTIONS]);
 
