@@ -7,7 +7,6 @@
 
 
 #include "Eagle/Color.hpp"
-#include <GL/gl.h>
 #include "Location.hpp"
 
 

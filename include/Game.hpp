@@ -31,6 +31,7 @@ public :
          minotaur()
    {
    }
+   void TextureMaze(EagleImage* textures[NUM_FACE_DIRECTIONS]);
 
    virtual SCENE_STATUS Init();/// returns SCENE_READY or SCENE_NOTREADY
    

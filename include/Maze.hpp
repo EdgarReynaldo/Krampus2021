@@ -20,6 +20,9 @@ public :
    size_t SIZE_EW;/// Width,x axis, valid rooms go from 1 to SIZE_EW
    MTRNG mazerng;
 
+   EagleImage* textures[NUM_FACE_DIRECTIONS];
+   EagleColor colors[NUM_FACE_DIRECTIONS];
+   
    void RandomizeWallWeights(std::vector<Wall*>& wlist);/// Uses mazerng
 
 
@@ -36,9 +39,17 @@ public :
       SIZE_UD((size_t)-1),
       SIZE_NS((size_t)-1),
       SIZE_EW((size_t)-1),
-      mazerng()
+      mazerng(),
+      textures(),
+      colors()
    {
       mazerng.Seed(0);
+      colors[FACE_UP] = EagleColor(255,255,255,255);
+      colors[FACE_N] = EagleColor(0,0,255,255);
+      colors[FACE_E] = EagleColor(0,255,255,255);
+      colors[FACE_DN] = EagleColor(127,127,127,255);
+      colors[FACE_S] = EagleColor(255,255,0,255);
+      colors[FACE_W] = EagleColor(127,127,255);
    }
 
 //   void SetupMaze(size_t depth , size_t height , size_t width);
@@ -53,6 +64,7 @@ public :
       for (size_t i = 1 ; i < SIZE_UD ; ++i) {
          KruskalizeWalls(wallvecs[i]);/// uses mazerng
       }
+      
    }
    
    void SetupRooms(size_t depth , size_t height , size_t width);

@@ -111,7 +111,7 @@ void PlayerCamera::SetupViewPoint() {
    SetHFOV(M_PI/3.0);
    SetAspect(1.6);
    SetPos(Vec3(player->location.x , player->location.y , player->location.z) + Vec3(0.5,0.5,0.5));
-   SetOrientation(player->movement.dest.orient);
+   SetOrientation(player->movement.current.orient);
    Setup3D(true);
 }
    

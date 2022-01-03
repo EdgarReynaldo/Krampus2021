@@ -4,6 +4,8 @@
 
 #include "Room.hpp"
 #include "Maze.hpp"
+#include "Eagle/Image.hpp"
+#include "Eagle/GraphicsContext.hpp"
 
 
 
@@ -36,4 +38,16 @@ void Room::SetupRoom(Maze* m , Location loc) {
    pfaces[FACE_UP] = &(pwall[FACE_UP]->facepos);
    pfaces[FACE_N] = &(pwall[FACE_N]->facepos);
    pfaces[FACE_E] = &(pwall[FACE_E]->facepos);
+   colors[FACE_DN] = m->colors[FACE_DN];
+   colors[FACE_S] = m->colors[FACE_S];
+   colors[FACE_W] = m->colors[FACE_W];
+   colors[FACE_UP] = m->colors[FACE_UP];
+   colors[FACE_N] = m->colors[FACE_N];
+   colors[FACE_E] = m->colors[FACE_E];
+   ptextures[FACE_UP] = m->textures[FACE_UP];
+   ptextures[FACE_N] = m->textures[FACE_N];
+   ptextures[FACE_E] = m->textures[FACE_E];
+   ptextures[FACE_DN] = m->textures[FACE_DN];
+   ptextures[FACE_S] = m->textures[FACE_S];
+   ptextures[FACE_W] = m->textures[FACE_W];
 }

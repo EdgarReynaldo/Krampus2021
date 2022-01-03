@@ -7,6 +7,17 @@
 
 
 
+void Game::TextureMaze(EagleImage* textures[NUM_FACE_DIRECTIONS]) {
+   maze.textures[FACE_DN] = textures[FACE_DN];
+   maze.textures[FACE_S] = textures[FACE_S];
+   maze.textures[FACE_W] = textures[FACE_W];
+   maze.textures[FACE_UP] = textures[FACE_UP];
+   maze.textures[FACE_N] = textures[FACE_N];
+   maze.textures[FACE_E] = textures[FACE_E];
+}
+
+
+
 SCENE_STATUS Game::Init() {
    SetupMaze(1 , 25 , 25);
    player.location = Location(1,1,1);

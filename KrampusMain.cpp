@@ -36,8 +36,18 @@ int main(int argc , char** argv) {
    
    Camera cam(Vec3(0,0,0) , Orient(Vec3(0,0,0)) , M_PI/4.0 , 1.6);
    
+   EagleImage* textures[NUM_FACE_DIRECTIONS] = {
+      win->LoadImageFromFile("Ceiling.png"),
+      win->LoadImageFromFile("NorthWall.png"),
+      win->LoadImageFromFile("EastWall.png"),
+      win->LoadImageFromFile("Floor.png"),
+      win->LoadImageFromFile("SouthWall.png"),
+      win->LoadImageFromFile("WestWall.png"),
+   };
+   
    Game game;
    if (game.Init() != SCENE_READY) {
+      game.TextureMaze(textures);
       EagleCritical() << "Failed to setup game." << std::endl;
       return 1;
    }
@@ -45,7 +55,7 @@ int main(int argc , char** argv) {
    while (!quit) {
       if (redraw) {
          win->Clear();
-         game.Display();
+         game.Display(win);
          win->FlipDisplay();
          redraw = false;
       }

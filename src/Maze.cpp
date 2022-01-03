@@ -6,7 +6,7 @@
 #include "Maze.hpp"
 #include "Wall.hpp"
 #include "Cube.hpp"
-
+#include "GL/gl.h"
 #include "Eagle/Exception.hpp"
 
 
@@ -138,23 +138,16 @@ void Maze::KruskalizeWalls(std::vector<Wall*>& walls) {
 
 
 void Maze::DrawLevel(size_t level) {
-   EagleColor colors[NUM_FACE_DIRECTIONS] = {
-      EagleColor(0,255,255),
-      EagleColor(0,255,0),
-      EagleColor(255,255,0),
-      EagleColor(0,0,127),
-      EagleColor(0,127,0),
-      EagleColor(127,0,0)
-   };
    glEnable(GL_CULL_FACE);
    glCullFace(GL_BACK);
    glEnable(GL_DEPTH_TEST);
+   /// Brute force all of maze
    glClear(GL_DEPTH_BUFFER_BIT);
    glBegin(GL_TRIANGLES);
    for (unsigned int yy = 1 ; yy < SIZE_NS ; ++yy) {
       for (unsigned int xx = 1 ; xx < SIZE_EW ; ++xx) {
-         Room* r = &rooms[RoomIndex(Location(level , yy , xx))];
-         DrawCubeInsides(Location(level , yy , xx) , colors);
+//         Room* r = &rooms[RoomIndex(Location(level , yy , xx))];
+         DrawCubeInsides(Location(level , yy , xx) , colors , textures);
       }
    }
    glEnd();
