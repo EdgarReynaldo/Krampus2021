@@ -19,6 +19,8 @@
 					<Add option="-lEagleA5DebugShared.dll" />
 					<Add option="-lEagleDebugShared.dll" />
 					<Add option="-lallegro_monolith-debug.dll" />
+					<Add option="-lopengl32" />
+					<Add option="-lglu32" />
 					<Add option="-ldwmapi" />
 				</Linker>
 			</Target>
@@ -35,6 +37,8 @@
 					<Add option="-lEagleA5Shared.dll" />
 					<Add option="-lEagleShared.dll" />
 					<Add option="-lallegro_monolith-debug.dll" />
+					<Add option="-lglu32" />
+					<Add option="-lopengl32" />
 					<Add option="-ldwmapi" />
 					<Add option="-s" />
 				</Linker>
