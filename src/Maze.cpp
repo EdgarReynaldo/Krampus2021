@@ -3,11 +3,12 @@
 
 
 #include <unordered_set>
+#include "Eagle.hpp"
+#include "Eagle/backends/Allegro5Backend.hpp"
 #include "Maze.hpp"
 #include "Wall.hpp"
 #include "Cube.hpp"
 #include "GL/gl.h"
-#include "Eagle/Exception.hpp"
 
 
 
@@ -137,17 +138,13 @@ void Maze::KruskalizeWalls(std::vector<Wall*>& walls) {
 
 
 
-void Maze::DrawLevel(size_t level) {
-   glEnable(GL_CULL_FACE);
-   glCullFace(GL_BACK);
-   glEnable(GL_DEPTH_TEST);
-   /// Brute force all of maze
-   glClear(GL_DEPTH_BUFFER_BIT);
+void Maze::DrawLevel(EagleGraphicsContext* win , size_t level) {
    glBegin(GL_TRIANGLES);
    for (unsigned int yy = 1 ; yy < SIZE_NS ; ++yy) {
       for (unsigned int xx = 1 ; xx < SIZE_EW ; ++xx) {
-//         Room* r = &rooms[RoomIndex(Location(level , yy , xx))];
-         DrawCubeInsides(Location(level , yy , xx) , colors , textures);
+         Room* r = &rooms[RoomIndex(Location(level , yy , xx))];
+         r->DrawRoom(win);
+///         DrawCubeInsides(Location(level , yy , xx) , colors , textures);
       }
    }
    glEnd();

@@ -11,6 +11,10 @@
 #include "Orient.hpp"
 
 
+extern const Vec3 ORIGIN;
+
+
+
 
 class SpatialInfo {
    
@@ -21,7 +25,6 @@ public :
    SpatialInfo() : pos() , orient() {}
    SpatialInfo(Vec3 p , Orient o) : pos(p) , orient(o) {}
 };
-
 
 
 extern const SpatialInfo START;

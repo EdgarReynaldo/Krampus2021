@@ -23,6 +23,9 @@ int main(int argc , char** argv) {
    int sw = 800;
    int sh = 600;
    int flags = EAGLE_OPENGL | EAGLE_WINDOWED;
+   al_set_new_display_option(ALLEGRO_FLOAT_DEPTH , 1 , ALLEGRO_SUGGEST);
+   al_set_new_display_option(ALLEGRO_DEPTH_SIZE , 24 , ALLEGRO_SUGGEST);
+   
    EagleGraphicsContext* win = sys->CreateGraphicsContext("Main" , sw , sh , flags);
    EAGLE_ASSERT(win && win->Valid());
    
@@ -42,20 +45,23 @@ int main(int argc , char** argv) {
       win->LoadImageFromFile("EastWall.png"),
       win->LoadImageFromFile("Floor.png"),
       win->LoadImageFromFile("SouthWall.png"),
-      win->LoadImageFromFile("WestWall.png"),
+      win->LoadImageFromFile("WestWall.png")
    };
    
    Game game;
+   game.TextureMaze(textures);
    if (game.Init() != SCENE_READY) {
-      game.TextureMaze(textures);
       EagleCritical() << "Failed to setup game." << std::endl;
       return 1;
    }
    
+   sys->GetSystemTimer()->Start();
+   
    while (!quit) {
       if (redraw) {
-         win->Clear();
+         win->Clear(EagleColor(255,255,255,255));
          game.Display(win);
+//         win->Draw(textures[FACE_UP] , 10,40);
          win->FlipDisplay();
          redraw = false;
       }
@@ -65,9 +71,10 @@ int main(int argc , char** argv) {
             quit = true;
          }
          if (e.type == EAGLE_EVENT_TIMER) {
+            game.Update(e.timer.eagle_timer_source->SPT());
             redraw = true;
          }
-      } while (!quit);
+      } while (!sys->UpToDate());
    }
    return 0;
 }

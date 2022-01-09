@@ -23,7 +23,7 @@ void Camera::Setup3D(bool orthographic) {
    ALLEGRO_TRANSFORM proj;
    ALLEGRO_TRANSFORM cam;
    
-   const double near = 0.1;
+   const double near = 0.2;
    const double w = near*tan(hfov/2.0);
 
 ///   const double l = -w;
@@ -43,7 +43,7 @@ void Camera::Setup3D(bool orthographic) {
       al_perspective_transform(&proj , l , top , near , r , bot , far);
    }
    else {
-      int diam = 50;
+      int diam = 25;
       al_orthographic_transform(&proj , -diam , diam , -diam , diam , -diam , diam);
    }
    al_use_projection_transform(&proj);
@@ -108,7 +108,7 @@ void PlayerCamera::SetPlayer(PlayerBase* p) {
 
 
 void PlayerCamera::SetupViewPoint() {
-   SetHFOV(M_PI/3.0);
+   SetHFOV(2.0*M_PI/3.0);
    SetAspect(1.6);
    SetPos(Vec3(player->location.x , player->location.y , player->location.z) + Vec3(0.5,0.5,0.5));
    SetOrientation(player->movement.current.orient);

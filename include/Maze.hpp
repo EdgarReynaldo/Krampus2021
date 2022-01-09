@@ -6,10 +6,10 @@
 #define MAZE_HPP
 
 #include <vector>
-#include "Room.hpp"
 #include "Eagle/Random.hpp"
+#include "Room.hpp"
 
-
+class EagleGraphicsContext;
 class Wall;
 
 class Maze {
@@ -71,7 +71,7 @@ public :
    std::vector<Wall*> GetWallList(size_t zz);
    void KruskalizeWalls(std::vector<Wall*>& walls);/// Uses mazerng
    
-   void DrawLevel(size_t level);
+   void DrawLevel(EagleGraphicsContext* win , size_t level);
 };
 
 

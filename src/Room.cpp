@@ -51,3 +51,14 @@ void Room::SetupRoom(Maze* m , Location loc) {
    ptextures[FACE_S] = m->textures[FACE_S];
    ptextures[FACE_W] = m->textures[FACE_W];
 }
+
+
+
+void Room::DrawRoom(EagleGraphicsContext* win) {
+   for (size_t i = 0 ; i < NUM_FACE_DIRECTIONS ; ++i) {
+      const float* face = GetInsideCubeFace((FACE_DIRECTION)i);
+      if (pwall[(FACE_DIRECTION)i]->Solid()) {
+         QueueInsideFaceTrianglesTex((FACE_DIRECTION)i , pfaces[(FACE_DIRECTION)i]->location , colors[(FACE_DIRECTION)i] , ptextures[(FACE_DIRECTION)i]);
+      }
+   }
+}

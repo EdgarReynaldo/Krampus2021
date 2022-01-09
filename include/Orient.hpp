@@ -8,9 +8,19 @@
 #include "Vec3.hpp"
 
 
+
+
+extern const Vec3 UP;
+extern const Vec3 RIGHT;
+extern const Vec3 FORWARD;
+
+
+
 class Orient {
 
 protected :
+public :
+
    Vec3 theta;/// yaw,pitch,roll
    
    Vec3 fw,rt,up;
@@ -18,11 +28,11 @@ protected :
    void CalcTheta();
    void CalcAxes();
    
-public :
    
    
    Orient() : theta(0,0,0) , fw(FORWARD) , rt(RIGHT) , up(UP) {}
    Orient(Vec3 angles) : theta() , fw(FORWARD) , rt(RIGHT) , up(UP) {SetTheta(angles);}
+   Orient(float yaw , float pitch , float roll) : theta(Vec3(yaw,pitch,roll)) , fw(FORWARD) , rt(RIGHT) , up(UP) {SetTheta(theta);}
    
    Orient operator-(const Orient& o);
    

@@ -50,13 +50,33 @@ SCENE_STATUS Game::Update(double dt) {
    return status = SCENE_RUNNING;
 }
 
-
+#include "GL/gl.h"
+#include "Eagle/System.hpp"
+#include "Eagle/Timer.hpp"
+#include "Eagle/StringWork.hpp"
 
 void Game::Display(EagleGraphicsContext* win) {
+//   player.SetupCamera();
+//   glEnable(GL_CULL_FACE);
+//   glCullFace(GL_BACK);
+   glDisable(GL_CULL_FACE);
+   glEnable(GL_TEXTURE_2D);
+   glEnable(GL_COLOR_MATERIAL);
+   glEnable(GL_DEPTH_TEST);
+   /// Brute force all of maze
+   glClear(GL_DEPTH_BUFFER_BIT);
+
+///   Camera cam(Vec3(12.5,12.5,10.0) , Orient(-90.0f,-90.0f,0.0f) , 2.0*M_PI/3.0 , 1.6);
+///   cam.Setup3D(false);
    player.SetupCamera();
-   maze.DrawLevel(1);
-   Setup2D(1200,900);
-   win->DrawTextString(win->DefaultFont() , "Hello Krampus Revenge" , 10 , 10 , EagleColor(255,255,0));
+   maze.DrawLevel(win , 1);
+   Setup2D(win->Width() , win->Height());
+   glDisable(GL_CULL_FACE);
+   glDisable(GL_DEPTH_TEST);
+   win->DrawTextString(win->DefaultFont() , StringPrintF("Hello Krampus Revenge %lf" , win->GetSystem()->GetSystemTimer()->TimePassed()) , 10 , 10 , EagleColor(127,64,0));
+   Orient* o = &player.movement.current.orient;
+   win->DrawTextString(win->DefaultFont() , StringPrintF("loc = %d,%d,%d , orient = %lf,%lf,%lf" , player.location.z , player.location.y , player.location.x , 
+   o->theta.yaw , o->theta.pitch , o->theta.roll) , 10 , 40 , EagleColor(255,0,64));
    
 }
 

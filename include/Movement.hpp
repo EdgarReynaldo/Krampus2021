@@ -50,21 +50,25 @@ public :
 public :
 //   Movement();
    Movement() :
+         AnimationBase(),
          dest(),
          prev(),
          current(),
          heading(COMPASS_NORTH),
          gaze(GAZE_LEVEL)
-   {}
+   {
+      AnimationBase::Init(60 , 1 , 2.0 , ANIMATION_ONCE_FORWARDS);
+   }
    void SetLocation(Vec3 pos);
+   void SetTheta(Vec3 angles);
    void SetCompassAndGaze(COMPASS_DIRECTION dir , GAZE_DIRECTION pitch);
 
 };
 
 double PitchFromGaze(GAZE_DIRECTION gdir);
 double YawFromDirection(COMPASS_DIRECTION comdir);
-
-
+GAZE_DIRECTION GazeFromPitch(double pitch);
+COMPASS_DIRECTION DirectionFromYaw(double yaw);
 
 
 #endif // MOVEMENT_HPP

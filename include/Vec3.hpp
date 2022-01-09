@@ -94,13 +94,9 @@ inline Vec3 MidPoint(const Vec3& v1 , const Vec3& v2) {
    return Vec3((v1.x + v2.x)/2.0 , (v1.y + v2.y)/2.0 , (v1.z + v2.z)/2.0);
 }
 
-extern const Vec3 ORIGIN;
-
 bool ScanVec3(const char* str , Vec3& v);
 
-extern const Vec3 UP;
-extern const Vec3 RIGHT;
-extern const Vec3 FORWARD;
+
 
 #endif // Vec3_HPP
 
