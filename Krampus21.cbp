@@ -152,6 +152,7 @@
 			<Add directory="e:/usr64/lib" />
 		</Linker>
 		<Unit filename="KrampusMain.cpp" />
+		<Unit filename="bin/allegro.log" />
 		<Unit filename="include/Camera.hpp" />
 		<Unit filename="include/Cube.hpp" />
 		<Unit filename="include/Events.hpp" />
@@ -161,6 +162,7 @@
 		<Unit filename="include/Items.hpp" />
 		<Unit filename="include/Location.hpp" />
 		<Unit filename="include/Maze.hpp" />
+		<Unit filename="include/MazeCamera.hpp" />
 		<Unit filename="include/Movement.hpp" />
 		<Unit filename="include/Orient.hpp" />
 		<Unit filename="include/Player.hpp" />
@@ -179,6 +181,7 @@
 		<Unit filename="src/Items.cpp" />
 		<Unit filename="src/Location.cpp" />
 		<Unit filename="src/Maze.cpp" />
+		<Unit filename="src/MazeCamera..cpp" />
 		<Unit filename="src/Movement.cpp" />
 		<Unit filename="src/Orient.cpp" />
 		<Unit filename="src/Player.cpp" />
