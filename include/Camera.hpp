@@ -16,10 +16,10 @@ class Camera {
 protected :
    SpatialInfo info;/// pos, orient
 
-   double hfov;/// horizontal field of view
-   double aspect;/// w/h of backbuffer
+   double hfov;/// horizontal field of view, in radians
+   double aspect;/// w/h ratio of backbuffer
    
-   bool ortho;/// orthographic
+   bool ortho;/// orthographic if true
    
 public :
    

@@ -39,6 +39,8 @@ class Movement : public AnimationBase {
    void OnSetAnimationPercent();
    void OnLoopComplete();
 
+//public :
+
 public :
    SpatialInfo dest;
    SpatialInfo prev;
@@ -47,7 +49,6 @@ public :
    COMPASS_DIRECTION heading;
    GAZE_DIRECTION gaze;
 
-public :
 //   Movement();
    Movement() :
          AnimationBase(),
@@ -62,8 +63,14 @@ public :
    void SetLocation(Vec3 pos);
    void SetTheta(Vec3 angles);
    void SetCompassAndGaze(COMPASS_DIRECTION dir , GAZE_DIRECTION pitch);
-
+   
+   void Finish();
+   
+   Orient Orientation();
+   Vec3 Position();
 };
+
+Location Forward(Location loc , COMPASS_DIRECTION dir);
 
 double PitchFromGaze(GAZE_DIRECTION gdir);
 double YawFromDirection(COMPASS_DIRECTION comdir);

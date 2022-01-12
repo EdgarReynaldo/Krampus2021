@@ -50,7 +50,6 @@ void QueueInsideFaceTrianglesTex(FACE_DIRECTION d , Location loc , EagleColor co
       Vec3D(face[9] , face[10] , face[11]) + Vec3D(loc.x + 0.5f , loc.y + 0.5f , loc.z + 0.5f)
    };
    GLuint tid = al_get_opengl_texture(GetAllegroBitmap(tex));
-   glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D , tid);
    Vec3D n1 = GetNormal(center[0] , center[1] , center[2]);
    Vec3D n2 = GetNormal(center[2] , center[3] , center[0]);

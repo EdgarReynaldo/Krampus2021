@@ -25,6 +25,9 @@ int main(int argc , char** argv) {
    int flags = EAGLE_OPENGL | EAGLE_WINDOWED;
    al_set_new_display_option(ALLEGRO_FLOAT_DEPTH , 1 , ALLEGRO_SUGGEST);
    al_set_new_display_option(ALLEGRO_DEPTH_SIZE , 24 , ALLEGRO_SUGGEST);
+   al_set_new_display_option(ALLEGRO_OPENGL_MAJOR_VERSION , 3 , ALLEGRO_REQUIRE);
+   al_set_new_display_option(ALLEGRO_OPENGL_MINOR_VERSION , 0 , ALLEGRO_REQUIRE);
+   
    
    EagleGraphicsContext* win = sys->CreateGraphicsContext("Main" , sw , sh , flags);
    EAGLE_ASSERT(win && win->Valid());

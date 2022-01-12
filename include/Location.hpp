@@ -8,7 +8,6 @@
 
 
 
-
 class Maze;
 
 class Location {

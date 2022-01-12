@@ -25,14 +25,18 @@ public :
    
    Vec3 fw,rt,up;
 
-   void CalcTheta();
+//   void CalcTheta();
    void CalcAxes();
    
    
    
-   Orient() : theta(0,0,0) , fw(FORWARD) , rt(RIGHT) , up(UP) {}
-   Orient(Vec3 angles) : theta() , fw(FORWARD) , rt(RIGHT) , up(UP) {SetTheta(angles);}
-   Orient(float yaw , float pitch , float roll) : theta(Vec3(yaw,pitch,roll)) , fw(FORWARD) , rt(RIGHT) , up(UP) {SetTheta(theta);}
+   Orient();
+   Orient(Vec3 angles);
+   Orient(float yaw , float pitch , float roll);
+   Orient(Vec3 forwardvec , Vec3 upvec);
+
+
+      
    
    Orient operator-(const Orient& o);
    

@@ -11,7 +11,6 @@
 void Movement::OnSetAnimationPercent() {
    current.orient.SetTheta(Interpolate(prev.orient.Theta() , dest.orient.Theta() , animation_percent));
    current.pos = Interpolate(prev.pos , dest.pos , animation_percent);
-   
 }
 
 
@@ -26,13 +25,14 @@ void Movement::OnLoopComplete() {
 
 void Movement::SetLocation(Vec3 pos) {
    dest.pos = pos;
+   ResetAnimation();
 }
 
 
 
 void Movement::SetTheta(Vec3 angles) {
    dest.orient.SetTheta(angles);
-   
+   ResetAnimation();
 }
 
 
@@ -42,6 +42,49 @@ void Movement::SetCompassAndGaze(COMPASS_DIRECTION dir , GAZE_DIRECTION pitch) {
    pitch = (GAZE_DIRECTION)(pitch % NUM_GAZES);
 //   prev.orient = Orient(Vec3(YawFromDirection(heading) , PitchFromGaze(gaze) , 0.0));
    dest.orient = Orient(Vec3(YawFromDirection(dir) , PitchFromGaze(pitch) , 0.0));
+   ResetAnimation();
+}
+
+
+void Movement::Finish() {
+   prev = current = dest;
+   ResetAnimation();
+}
+
+
+
+Orient Movement::Orientation() {
+   return current.orient;
+}
+
+
+
+Vec3 Movement::Position() {
+   return current.pos;
+}
+
+
+
+/// Global
+
+   
+
+Location Forward(Location loc , COMPASS_DIRECTION dir) {
+   switch (dir) {
+   case COMPASS_NORTH :
+      return loc.North();
+      break;
+   case COMPASS_EAST :
+      return loc.East();
+      break;
+   case COMPASS_SOUTH :
+      return loc.South();
+      break;
+   case COMPASS_WEST :
+      return loc.West();
+      break;
+   }
+   return loc;
 }
 
 
@@ -114,7 +157,7 @@ COMPASS_DIRECTION DirectionFromYaw(double yaw) {
    /// We want a compass direction, and positive goes cw from north
    if (yaw < M_PI/4.0 || yaw >= 7.0*M_PI/4.0) {
       return COMPASS_EAST;
-   else if (yaw < 3.0*M_PI/4.0) {
+   } else if (yaw < 3.0*M_PI/4.0) {
       return COMPASS_NORTH;
    }
    else if (yaw < 5.0*M_PI/4.0) {

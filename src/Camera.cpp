@@ -23,7 +23,7 @@ void Camera::Setup3D(bool orthographic) {
    ALLEGRO_TRANSFORM proj;
    ALLEGRO_TRANSFORM cam;
    
-   const double near = 0.2;
+   const double near = 1.0;
    const double w = near*tan(hfov/2.0);
 
 ///   const double l = -w;
@@ -35,7 +35,7 @@ void Camera::Setup3D(bool orthographic) {
    
    const double top = w/aspect;
    const double bot = -w/aspect;
-   const double far = 25.0;
+   const double far = 50.0;
 
    
    al_identity_transform(&proj);
@@ -111,7 +111,7 @@ void PlayerCamera::SetupViewPoint() {
    SetHFOV(2.0*M_PI/3.0);
    SetAspect(1.6);
    SetPos(Vec3(player->location.x , player->location.y , player->location.z) + Vec3(0.5,0.5,0.5));
-   SetOrientation(player->movement.current.orient);
+   SetOrientation(player->movement.Orientation());
    Setup3D(true);
 }
    

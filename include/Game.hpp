@@ -10,8 +10,11 @@
 #include "Maze.hpp"
 #include "Scene.hpp"
 #include "Player.hpp"
+#include "MazeCamera.hpp"
 
 
+
+void CheckGL();
 
 class Game : public Scene {
    
@@ -21,6 +24,8 @@ class Game : public Scene {
    HumanPlayer player;
    Minotaur minotaur;
 
+   MazeCamera cam;
+   //(Vec3(12.5,12.5,10.0) , Orient(-90.0f,-90.0f,0.0f) , 2.0*M_PI/3.0 , 1.6);
 public :
 //   Game();
    Game() :
@@ -28,7 +33,8 @@ public :
          maze(),
          inventory(),
          player(),
-         minotaur()
+         minotaur(),
+         cam()
    {
    }
    void TextureMaze(EagleImage* textures[NUM_FACE_DIRECTIONS]);

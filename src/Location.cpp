@@ -4,6 +4,7 @@
 
 #include "Location.hpp"
 #include "Maze.hpp"
+#include "Movement.hpp"
 
 
 
@@ -16,3 +17,5 @@ bool Location::ValidForMaze(Maze* m) {
    if (z >= (int)m->SIZE_UD) {return false;}
    return true;
 }
+
+

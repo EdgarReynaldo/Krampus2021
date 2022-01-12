@@ -28,6 +28,9 @@ SCENE_STATUS Game::Init() {
    
    minotaur.pmaze = &maze;
    
+   cam.SetLocation(Location(1,1,1));
+   cam.SetCompassAndGaze(COMPASS_NORTH , GAZE_LEVEL);
+   
    return status = SCENE_READY;
 }
 
@@ -38,8 +41,30 @@ SCENE_STATUS Game::HandleEvent(EagleEvent e) {
    if (e.type == EAGLE_EVENT_KEY_DOWN && e.keyboard.keycode == EAGLE_KEY_ESCAPE) {
       return status = SCENE_COMPLETE;
    }
-   player.React(e);
-   minotaur.React(e);
+   if (e.type == EAGLE_EVENT_KEY_DOWN) {
+      if (e.keyboard.keycode == EAGLE_KEY_1) {
+         cam.SetCompassAndGaze(COMPASS_NORTH , GAZE_LOW);
+         cam.SetLocation(Location(3,-10,12));
+      }
+      else if (e.keyboard.keycode == EAGLE_KEY_2) {
+         cam.SetCompassAndGaze(COMPASS_EAST , GAZE_LOW);
+         cam.SetLocation(Location(3,12,-10));
+      }
+      else if (e.keyboard.keycode == EAGLE_KEY_3) {
+         cam.SetCompassAndGaze(COMPASS_SOUTH , GAZE_LOW);
+         cam.SetLocation(Location(3,-15,12));
+      }
+      else if (e.keyboard.keycode == EAGLE_KEY_4) {
+         cam.SetCompassAndGaze(COMPASS_WEST , GAZE_LOW);
+         cam.SetLocation(Location(3,12,-10));
+      }
+   }
+   
+   
+   
+   
+//   player.React(e);
+//   minotaur.React(e);
    return status = SCENE_RUNNING;
 }
 
@@ -49,34 +74,80 @@ SCENE_STATUS Game::Update(double dt) {
    player.Update(dt);
    return status = SCENE_RUNNING;
 }
-
-#include "GL/gl.h"
+#include "Eagle/Logging.hpp"
 #include "Eagle/System.hpp"
 #include "Eagle/Timer.hpp"
 #include "Eagle/StringWork.hpp"
+
+#include "GLRoutines.hpp"
+
+#include "GL/gl.h"
 
 void Game::Display(EagleGraphicsContext* win) {
 //   player.SetupCamera();
 //   glEnable(GL_CULL_FACE);
 //   glCullFace(GL_BACK);
+   EagleLog() << "Before setup." << std::endl;
+   CheckGL();
    glDisable(GL_CULL_FACE);
-   glEnable(GL_TEXTURE_2D);
-   glEnable(GL_COLOR_MATERIAL);
-   glEnable(GL_DEPTH_TEST);
+//   glEnable(GL_TEXTURE_2D);
+   glEnable(GL_BLEND);
+//   glEnable(GL_DEPTH_TEST);
+   EagleLog() << "After setup." << std::endl;
    /// Brute force all of maze
-   glClear(GL_DEPTH_BUFFER_BIT);
+//   glClear(GL_DEPTH_BUFFER_BIT);
 
-///   Camera cam(Vec3(12.5,12.5,10.0) , Orient(-90.0f,-90.0f,0.0f) , 2.0*M_PI/3.0 , 1.6);
-///   cam.Setup3D(false);
-   player.SetupCamera();
+   cam.Setup3D(false);
+
+   
+   CheckGL();
    maze.DrawLevel(win , 1);
-   Setup2D(win->Width() , win->Height());
+   CheckGL();
+   
+   Vec3 r = RIGHT*20.0;
+   Vec3 u = UP*20.0;
+   Vec3 f = FORWARD*20.0;
+   
+   glBegin(GL_LINES);
+
+   /// X Axis is red
+   glColor3ub(127,0,0);
+   glVertex3d(-r.x , -r.y , -r.z);
+   glVertex3i(0,0,0);
+
+   glColor3ub(255,0,0);
+   glVertex3i(0,0,0);
+   glVertex3d(r.x , r.y , r.z);
+
+   /// Y Axis is green
+   glColor3ub(0,127,0);
+   glVertex3d(-u.x , -u.y , -u.z);
+   glVertex3i(0,0,0);
+
+   glColor3ub(0,255,0);
+   glVertex3i(0,0,0);
+   glVertex3d(u.x , u.y , u.z);
+
+   /// Z Axis is blue
+   glColor3ub(0,0,127);
+   glVertex3d(-f.x , -f.y , -f.z);
+   glVertex3i(0,0,0);
+   glColor3ub(0,0,255);
+   glVertex3i(0,0,0);
+   glVertex3d(f.x , f.y , f.z);
+
+   glEnd();
+   
+   cam.Setup2D(0,0,win->Width() , win->Height());
    glDisable(GL_CULL_FACE);
    glDisable(GL_DEPTH_TEST);
+
    win->DrawTextString(win->DefaultFont() , StringPrintF("Hello Krampus Revenge %lf" , win->GetSystem()->GetSystemTimer()->TimePassed()) , 10 , 10 , EagleColor(127,64,0));
-   Orient* o = &player.movement.current.orient;
-   win->DrawTextString(win->DefaultFont() , StringPrintF("loc = %d,%d,%d , orient = %lf,%lf,%lf" , player.location.z , player.location.y , player.location.x , 
-   o->theta.yaw , o->theta.pitch , o->theta.roll) , 10 , 40 , EagleColor(255,0,64));
+//   Orient* o = &player.movement.current.orient;
+   SpatialInfo info = cam.Info();
+
+   win->DrawTextString(win->DefaultFont() , StringPrintF("loc = %d,%d,%d , orient = %lf,%lf,%lf" , (int)info.pos.z , (int)info.pos.y , (int)info.pos.x , 
+   info.orient.theta.yaw , info.orient.theta.pitch , info.orient.theta.roll) , 10 , 40 , EagleColor(255,0,64));
    
 }
 
