@@ -43,12 +43,13 @@ SCENE_STATUS Game::HandleEvent(EagleEvent e) {
    }
    if (e.type == EAGLE_EVENT_KEY_DOWN) {
       if (e.keyboard.keycode == EAGLE_KEY_1) {
-         cam.SetCompassAndGaze(COMPASS_NORTH , GAZE_LOW);
-         cam.SetLocation(Location(3,-10,12));
+         cam.SetCompassAndGaze(COMPASS_NORTH , GAZE_HIGH);
+//         cam.SetLocation(Location(3,-10,12));
+         cam.SetLocation(Location(-2 , 12 , 12));
       }
       else if (e.keyboard.keycode == EAGLE_KEY_2) {
-         cam.SetCompassAndGaze(COMPASS_EAST , GAZE_LOW);
-         cam.SetLocation(Location(3,12,-10));
+         cam.SetCompassAndGaze(COMPASS_SOUTH , GAZE_HIGH);
+         cam.SetLocation(Location(-10,12,12));
       }
       else if (e.keyboard.keycode == EAGLE_KEY_3) {
          cam.SetCompassAndGaze(COMPASS_SOUTH , GAZE_LOW);
@@ -87,19 +88,23 @@ void Game::Display(EagleGraphicsContext* win) {
 //   player.SetupCamera();
 //   glEnable(GL_CULL_FACE);
 //   glCullFace(GL_BACK);
-   EagleLog() << "Before setup." << std::endl;
-   CheckGL();
-   glDisable(GL_CULL_FACE);
+//   EagleLog() << "Before setup." << std::endl;
+//   CheckGL();
+//   glDisable(GL_CULL_FACE);
 //   glEnable(GL_TEXTURE_2D);
-   glEnable(GL_BLEND);
+//   glEnable(GL_BLEND);
 //   glEnable(GL_DEPTH_TEST);
-   EagleLog() << "After setup." << std::endl;
+//   EagleLog() << "After setup." << std::endl;
    /// Brute force all of maze
 //   glClear(GL_DEPTH_BUFFER_BIT);
+
+   glPolygonMode(GL_FRONT_AND_BACK , GL_FILL);
 
    cam.Setup3D(false);
 
    
+//   glEnable(GL_DEPTH_TEST);
+//   glClear(GL_DEPTH_BUFFER_BIT);
    CheckGL();
    maze.DrawLevel(win , 1);
    CheckGL();
@@ -132,6 +137,7 @@ void Game::Display(EagleGraphicsContext* win) {
    glColor3ub(0,0,127);
    glVertex3d(-f.x , -f.y , -f.z);
    glVertex3i(0,0,0);
+
    glColor3ub(0,0,255);
    glVertex3i(0,0,0);
    glVertex3d(f.x , f.y , f.z);
@@ -141,6 +147,7 @@ void Game::Display(EagleGraphicsContext* win) {
    cam.Setup2D(0,0,win->Width() , win->Height());
    glDisable(GL_CULL_FACE);
    glDisable(GL_DEPTH_TEST);
+   glFrontFace(GL_CW);
 
    win->DrawTextString(win->DefaultFont() , StringPrintF("Hello Krampus Revenge %lf" , win->GetSystem()->GetSystemTimer()->TimePassed()) , 10 , 10 , EagleColor(127,64,0));
 //   Orient* o = &player.movement.current.orient;

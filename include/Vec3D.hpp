@@ -7,6 +7,7 @@
 
 
 
+#include <ostream>
 
 class Vec3D {
 public :
@@ -25,6 +26,8 @@ public :
 
    double Magnitude();
    Vec3D& Normalize();
+   
+   friend std::ostream& operator<<(std::ostream& os , const Vec3D& v);
 };
 
 //Vec3D operator-(const Vec3D& v1 , const Vec3D& v2);
@@ -42,6 +45,10 @@ inline Vec3D GetNormal(const Vec3D& a , const Vec3D& b , const Vec3D& c) {
    return C;
 }
 
+inline std::ostream& operator<<(std::ostream& os , const Vec3D& v) {
+   os << v.x << "," << v.y << "," << v.z;
+   return os;
+}
 #endif // VEC3D_HPP
 
 

@@ -76,8 +76,9 @@ void MazeCamera::Setup3D(bool ortho) {
    Vec3 uppos = mv.current.orient.up;
    al_build_camera_transform(&view , campos.x , campos.y , campos.z , eyepos.x , eyepos.y , eyepos.z , uppos.x , uppos.y , uppos.z);
    al_rotate_transform_3d(&rot , 1.0 , 0.0 , 0.0 , M_PI/2.0);
-   al_compose_transform(&view , &rot);
-   al_use_transform(&view);
+//   al_compose_transform(&view , &rot);
+   al_compose_transform(&rot , &view);
+   al_use_transform(&rot);
 }
 
 
@@ -116,8 +117,11 @@ void MazeCamera::Setup2D(int x , int y , int w , int h) {
    winview.SetArea(x,y,w,h);
    ALLEGRO_TRANSFORM ortho;
    al_identity_transform(&ortho);
-   al_orthographic_transform(&ortho , -w/2.0f , -h/2.0f , -1.0f , w/2.0 , h/2.0f , 1.0f);
+   al_use_transform(&ortho);
+//   al_orthographic_transform(&ortho , -w/2.0f , -h/2.0f , -1.0f , w/2.0 , h/2.0f , 1.0f);
+   al_orthographic_transform(&ortho , 0.0f , 0.0f , -1.0f , w , h , 1.0f);
    al_use_projection_transform(&ortho);
+   
 }
 
 

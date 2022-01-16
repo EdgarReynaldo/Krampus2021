@@ -140,11 +140,13 @@ void Maze::KruskalizeWalls(std::vector<Wall*>& walls) {
 #include "GLRoutines.hpp"
 
 void Maze::DrawLevel(EagleGraphicsContext* win , size_t level) {
-   glEnable(GL_TEXTURE_2D);
-   glEnable(GL_BLEND);
-   glEnable(GL_CULL_FACE);
+//   glEnable(GL_TEXTURE_2D);
+//   glEnable(GL_BLEND);
+   glFrontFace(GL_CCW);
+//   glDisable(GL_CULL_FACE);
+//   glEnable(GL_CULL_FACE);
+//   glCullFace(GL_BACK);
    CheckGL();
-   glBegin(GL_TRIANGLES);
    for (unsigned int yy = 1 ; yy < SIZE_NS ; ++yy) {
       for (unsigned int xx = 1 ; xx < SIZE_EW ; ++xx) {
          Room* r = &rooms[RoomIndex(Location(level , yy , xx))];
@@ -152,11 +154,10 @@ void Maze::DrawLevel(EagleGraphicsContext* win , size_t level) {
 ///         DrawCubeInsides(Location(level , yy , xx) , colors , textures);
       }
    }
-   glEnd();
    CheckGL();
-   glDisable(GL_TEXTURE_2D);
-   glDisable(GL_BLEND);
-   glDisable(GL_CULL_FACE);
+//   glDisable(GL_TEXTURE_2D);
+//   glDisable(GL_BLEND);
+//   glDisable(GL_CULL_FACE);
 }
 
 

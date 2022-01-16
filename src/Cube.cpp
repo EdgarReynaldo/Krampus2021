@@ -50,28 +50,35 @@ void QueueInsideFaceTrianglesTex(FACE_DIRECTION d , Location loc , EagleColor co
       Vec3D(face[9] , face[10] , face[11]) + Vec3D(loc.x + 0.5f , loc.y + 0.5f , loc.z + 0.5f)
    };
    GLuint tid = al_get_opengl_texture(GetAllegroBitmap(tex));
-   glBindTexture(GL_TEXTURE_2D , tid);
+//   glBindTexture(GL_TEXTURE_2D , tid);
    Vec3D n1 = GetNormal(center[0] , center[1] , center[2]);
    Vec3D n2 = GetNormal(center[2] , center[3] , center[0]);
-//   glBindTexture(GL_TEXTURE_2D , al_ogl
-   glColor4i(col.R() , col.G() , col.B() , col.A());
-   glNormal3f(n1.x , n1.y , n1.z);
+
+   glBegin(GL_TRIANGLES);
+
+//   glColor4b(col.R() , col.G() , col.B() , 255);
+   glColor4b(255,0,255 , 255);
+///   glNormal3f(n1.x , n1.y , n1.z);
    /// bl,br,tr
-   glTexCoord2f(0.0f,1.0f);
+//   glTexCoord2f(0.0f,1.0f);
    glVertex3f(center[0].x , center[0].y , center[0].z);
-   glTexCoord2f(1.0f,1.0f);
+//   glTexCoord2f(1.0f,1.0f);
    glVertex3f(center[1].x , center[1].y , center[1].z);
-   glTexCoord2f(1.0f,0.0f);
+//   glTexCoord2f(1.0f,0.0f);
    glVertex3f(center[2].x , center[2].y , center[2].z);
 
-   glNormal3f(n2.x , n2.y , n2.z);
+//   glColor4b(col.R() , col.G() , col.B() , 255);
+   glColor4b(255,255,0 , 255);
+///   glNormal3f(n2.x , n2.y , n2.z);
    /// tr,tl,bl
-   glTexCoord2f(1.0f,0.0f);
+//   glTexCoord2f(1.0f,0.0f);
    glVertex3f(center[2].x , center[2].y , center[2].z);
-   glTexCoord2f(0.0f,0.0f);
+//   glTexCoord2f(0.0f,0.0f);
    glVertex3f(center[3].x , center[3].y , center[3].z);
-   glTexCoord2f(0.0f,1.0f);
+//   glTexCoord2f(0.0f,1.0f);
    glVertex3f(center[0].x , center[0].y , center[0].z);
+
+   glEnd();
 }
 
 

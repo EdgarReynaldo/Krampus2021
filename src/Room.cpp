@@ -6,7 +6,7 @@
 #include "Maze.hpp"
 #include "Eagle/Image.hpp"
 #include "Eagle/GraphicsContext.hpp"
-
+#include "Eagle/StringWork.hpp"
 
 
 Room::Room() :
@@ -55,6 +55,7 @@ void Room::SetupRoom(Maze* m , Location loc) {
 
 
 void Room::DrawRoom(EagleGraphicsContext* win) {
+//   EagleInfo() << StringPrintF("Drawing room %d,%d,%d" , location.z , location.y , location.x) << std::endl;
    for (size_t i = 0 ; i < NUM_FACE_DIRECTIONS ; ++i) {
       const float* face = GetInsideCubeFace((FACE_DIRECTION)i);
       if (pwall[(FACE_DIRECTION)i]->Solid()) {
