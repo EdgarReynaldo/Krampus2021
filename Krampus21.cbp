@@ -157,6 +157,7 @@
 		<Unit filename="include/Cube.hpp" />
 		<Unit filename="include/Events.hpp" />
 		<Unit filename="include/Face.hpp" />
+		<Unit filename="include/GLRoutines.hpp" />
 		<Unit filename="include/Game.hpp" />
 		<Unit filename="include/Inventory.hpp" />
 		<Unit filename="include/Items.hpp" />
@@ -176,6 +177,7 @@
 		<Unit filename="src/Cube.cpp" />
 		<Unit filename="src/Events.cpp" />
 		<Unit filename="src/Face.cpp" />
+		<Unit filename="src/GLRoutines.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/Inventory.cpp" />
 		<Unit filename="src/Items.cpp" />
