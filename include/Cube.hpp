@@ -19,7 +19,7 @@ std::vector<float> MakeCubeInside(float radius);
 extern const std::vector<float> unitcubeinside;
 
 
-const float* GetInsideCubeFace(FACE_DIRECTION d);
+const float* GetInsideCubeFace(std::vector<float>& pts , FACE_DIRECTION d);
 
 //void QueueInsideFaceTriangles(FACE_DIRECTION d , Location loc , EagleColor col);
 void QueueInsideFaceTrianglesTex(FACE_DIRECTION d , Location loc , EagleColor col , EagleImage* tex);

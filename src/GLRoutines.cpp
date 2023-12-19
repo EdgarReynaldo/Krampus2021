@@ -4,14 +4,6 @@
 
 #include "GLRoutines.hpp"
 
-#include "Eagle/Logging.hpp"
-#include "Eagle/StringWork.hpp"
-
-#include "GL/gl.h"
-#include "GL/glu.h"
-
-
-
 
 
 void CheckGL() {
@@ -25,6 +17,12 @@ void CheckGL() {
          EagleLog() << "GL reports no error." << std::endl;
       }
    } while (err != GL_NO_ERROR);
+}
+
+
+
+GLuint GetOpenGLTexture(EagleImage* img) {
+   return al_get_opengl_texture(GetAllegroBitmap(img));
 }
 
 

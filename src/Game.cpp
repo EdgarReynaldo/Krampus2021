@@ -103,8 +103,11 @@ void Game::Display(EagleGraphicsContext* win) {
    cam.Setup3D(false);
 
    
-//   glEnable(GL_DEPTH_TEST);
-//   glClear(GL_DEPTH_BUFFER_BIT);
+   glEnable(GL_DEPTH_TEST);
+   glClear(GL_DEPTH_BUFFER_BIT);
+   glCullFace(GL_BACK);
+   glFrontFace(GL_CCW);
+   glEnable(GL_CULL_FACE);
    CheckGL();
    maze.DrawLevel(win , 1);
    CheckGL();
@@ -149,12 +152,12 @@ void Game::Display(EagleGraphicsContext* win) {
    glDisable(GL_DEPTH_TEST);
    glFrontFace(GL_CW);
 
-   win->DrawTextString(win->DefaultFont() , StringPrintF("Hello Krampus Revenge %lf" , win->GetSystem()->GetSystemTimer()->TimePassed()) , 10 , 10 , EagleColor(127,64,0));
+   win->DrawTextString(win->DefaultFont() , StringPrintF("Hello Krampus Revenge %lf" , win->GetSystem()->GetSystemTimer()->TimePassed()) , 10 , 10 , EagleColor(0,255,127));
 //   Orient* o = &player.movement.current.orient;
    SpatialInfo info = cam.Info();
 
    win->DrawTextString(win->DefaultFont() , StringPrintF("loc = %d,%d,%d , orient = %lf,%lf,%lf" , (int)info.pos.z , (int)info.pos.y , (int)info.pos.x , 
-   info.orient.theta.yaw , info.orient.theta.pitch , info.orient.theta.roll) , 10 , 40 , EagleColor(255,0,64));
+   info.orient.theta.yaw , info.orient.theta.pitch , info.orient.theta.roll) , 10 , 40 , EagleColor(0,255,255));
    
 }
 

@@ -25,6 +25,9 @@ class Game : public Scene {
    Minotaur minotaur;
 
    MazeCamera cam;
+   
+   Prism skybox;
+   UnitCube cube;
    //(Vec3(12.5,12.5,10.0) , Orient(-90.0f,-90.0f,0.0f) , 2.0*M_PI/3.0 , 1.6);
 public :
 //   Game();

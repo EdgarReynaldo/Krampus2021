@@ -2,12 +2,69 @@
 
 
 
-#ifndef Vec3_HPP
-#define Vec3_HPP
+#ifndef Vec234_HPP
+#define Vec234_HPP
 
 
 #include <cmath>
 #include <cassert>
+
+
+class Vec2 {
+public :
+   union {
+      double x;
+      double u;
+   };
+   union {
+      double y;
+      double v;
+   };
+   Vec2() : x(0.0) , y(0.0) {}
+   Vec2(double xpos , double ypos) : x(xpos) , y(ypos) {}
+   Vec2 operator+(const Vec2& v) const {
+      return Vec2(x + v.x , y + v.y);
+   }
+   Vec2 operator-(const Vec2& v) const {
+      return *this + -y;
+   }
+   inline Vec2 operator-() const {
+      return Vec2(-x,-y);
+   }
+   inline Vec2& operator+=(const Vec2& v) {
+      *this = *this + v;
+   }
+   inline Vec2& operator-=(const Vec2& v) {
+      *this = *this - v;
+      return *this;
+   }
+   inline Vec2& operator*=(double factor) {
+      *this = *this*factor;
+      return *this;
+   }
+   
+   friend Vec2 operator*(const Vec2& lhs , double factor);
+   friend Vec2 operator*(double factor , const Vec2& lhs);
+};
+
+
+
+inline Vec2 operator*(const Vec2& lhs , double factor) {
+   return Vec2(factor*lhs.x , factor*lhs.y);
+}
+
+
+
+inline Vec2 operator*(double factor , const Vec2& lhs) {
+   return Vec2(factor*lhs.x , factor*lhs.y);
+}
+
+
+
+inline Vec2 MidPoint(const Vec2& v1 , const Vec2& v2) {
+   return Vec2((v1.x + v2.x)/2.0 , (v1.y + v2.y)/2.0);
+}
+
 
 
 

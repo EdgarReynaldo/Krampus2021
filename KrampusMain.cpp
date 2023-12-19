@@ -42,6 +42,7 @@ int main(int argc , char** argv) {
    
    Camera cam(Vec3(0,0,0) , Orient(Vec3(0,0,0)) , M_PI/4.0 , 1.6);
    
+   al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MIPMAP | ALLEGRO_MAG_LINEAR);
    EagleImage* textures[NUM_FACE_DIRECTIONS] = {
       win->LoadImageFromFile("Ceiling.png"),
       win->LoadImageFromFile("NorthWall.png"),
@@ -57,6 +58,8 @@ int main(int argc , char** argv) {
       EagleCritical() << "Failed to setup game." << std::endl;
       return 1;
    }
+   
+   std::vector<float> stdcube = MakeCubeInside(100.0);
    
    sys->GetSystemTimer()->Start();
    

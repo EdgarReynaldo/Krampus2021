@@ -75,10 +75,10 @@ void MazeCamera::Setup3D(bool ortho) {
    Vec3 eyepos = campos + mv.current.orient.fw;
    Vec3 uppos = mv.current.orient.up;
    al_build_camera_transform(&view , campos.x , campos.y , campos.z , eyepos.x , eyepos.y , eyepos.z , uppos.x , uppos.y , uppos.z);
-   al_rotate_transform_3d(&rot , 1.0 , 0.0 , 0.0 , M_PI/2.0);
+   al_rotate_transform_3d(&rot , 1.0 , 0.0 , 0.0 , -M_PI/2.0);
 //   al_compose_transform(&view , &rot);
    al_compose_transform(&rot , &view);
-   al_use_transform(&rot);
+   al_use_transform(&view);
 }
 
 

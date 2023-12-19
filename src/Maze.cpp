@@ -140,12 +140,12 @@ void Maze::KruskalizeWalls(std::vector<Wall*>& walls) {
 #include "GLRoutines.hpp"
 
 void Maze::DrawLevel(EagleGraphicsContext* win , size_t level) {
-//   glEnable(GL_TEXTURE_2D);
 //   glEnable(GL_BLEND);
    glFrontFace(GL_CCW);
 //   glDisable(GL_CULL_FACE);
 //   glEnable(GL_CULL_FACE);
 //   glCullFace(GL_BACK);
+   glEnable(GL_TEXTURE_2D);
    CheckGL();
    for (unsigned int yy = 1 ; yy < SIZE_NS ; ++yy) {
       for (unsigned int xx = 1 ; xx < SIZE_EW ; ++xx) {
